@@ -36,10 +36,7 @@ public class Controller {
     @GetMapping("/{id}")
     @ResponseBody
     public Persona mostrarPersona(@PathVariable Long id) {
-        try{
             return personaServ.buscarPersona(id);
-        } catch (Exception e) { System.out.println(e);  }
-        return null;
     }
 
     @PutMapping("/{id}")
