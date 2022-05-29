@@ -32,10 +32,10 @@ public class Persona {
     private String pais;
     private String img;
     private String sobremi;
-    private Titulos[] formacion;
-    private Experiencias[] experiencias;
-    private Habilidades[] habilidades;
-    private Proyectos[] proyectos;
+    // private Titulos[] formacion;
+    //private Experiencias[] experiencias;
+    //private Habilidades[] habilidades;
+    // private Proyectos[] proyectos;
 
     public Persona() {
     }

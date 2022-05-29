@@ -36,7 +36,7 @@ public class Controller {
     @GetMapping("/{id}")
     @ResponseBody
     public Persona mostrarPersona(@PathVariable Long id) {
-            return personaServ.buscarPersona(id);
+        return personaServ.buscarPersona(id);
     }
 
     @PutMapping("/{id}")
@@ -67,7 +67,6 @@ public class Controller {
         personaServ.editarPersona(persona);
         return persona;
     }
-    
 
     /////FORMACION////
     List<Titulos> listaTitulos = new ArrayList();
@@ -75,33 +74,33 @@ public class Controller {
     @Autowired
     private ITituloService tituloServ;
 
-    @GetMapping("/{persona_id}/formacion")
+    @GetMapping("/formacion")
     @ResponseBody
-    public List<Titulos> verTitulos(@PathVariable Long persona_id) {
+    public List<Titulos> verTitulos() {
         return tituloServ.verFormacion();
     }
 
-    @PostMapping("/{persona_id}/titulo")
-    public Titulos agregarTitulo(@PathVariable Long persona_id,
+    @PostMapping("/titulo")
+    public Titulos agregarTitulo(
             @RequestBody Titulos titulo) {
         tituloServ.crearTitulo(titulo);
         return titulo;
     }
 
-    @DeleteMapping("/{persona_id}/titulo/{id}")
-    public void borrarTitulo(@PathVariable Long persona_id,
+    @DeleteMapping("/titulo/{id}")
+    public void borrarTitulo(
             @PathVariable Long id) {
         tituloServ.borrarTitulo(id);
     }
 
-    @GetMapping("/{persona_id}/titulo/{id}")
-    public void mostrarTitulo(@PathVariable Long persona_id,
+    @GetMapping("/titulo/{id}")
+    public void mostrarTitulo(
             @PathVariable Long id) {
         tituloServ.buscarTitulo(id);
     }
 
-    @PutMapping("/{persona_id}/titulo/{id}")
-    public Titulos modificarTitulo(@PathVariable Long persona_id,
+    @PutMapping("/titulo/{id}")
+    public Titulos modificarTitulo(
             @PathVariable Long id,
             @RequestParam("institucion") String newInstitucion,
             @RequestParam("inicio") String newInicio,
@@ -128,33 +127,33 @@ public class Controller {
     @Autowired
     private IExperienciaService expServ;
 
-    @GetMapping("/{persona_id}/experiencias")
+    @GetMapping("/experiencias")
     @ResponseBody
-    public List<Experiencias> verExperiencias(@PathVariable Long persona_id) {
+    public List<Experiencias> verExperiencias() {
         return expServ.verExperiencias();
     }
 
-    @PostMapping("/{persona_id}/experiencia")
-    public Experiencias agregarExperiencia(@PathVariable Long persona_id,
+    @PostMapping("/experiencia")
+    public Experiencias agregarExperiencia(
             @RequestBody Experiencias experiencia) {
         expServ.crearExperiencia(experiencia);
         return experiencia;
     }
 
-    @DeleteMapping("/{persona_id}/experiencia/{id}")
-    public void borrarExperiencia(@PathVariable Long persona_id,
+    @DeleteMapping("/experiencia/{id}")
+    public void borrarExperiencia(
             @PathVariable Long id) {
         expServ.borrarExperiencia(id);
     }
 
-    @GetMapping("/{persona_id}/experiencia/{id}")
-    public void mostrarExperiencia(@PathVariable Long persona_id,
+    @GetMapping("/experiencia/{id}")
+    public void mostrarExperiencia(
             @PathVariable Long id) {
         expServ.buscarExperiencia(id);
     }
 
-    @PutMapping("/{persona_id}/experiencia/{id}")
-    public Experiencias modificarExperiencia(@PathVariable Long persona_id,
+    @PutMapping("/experiencia/{id}")
+    public Experiencias modificarExperiencia(
             @PathVariable Long id,
             @RequestParam("empresa") String newEmpresa,
             @RequestParam("inicio") String newInicio,
@@ -181,33 +180,33 @@ public class Controller {
     @Autowired
     private IHabilidadService habilServ;
 
-    @GetMapping("/{persona_id}/habilidades")
+    @GetMapping("/habilidades")
     @ResponseBody
-    public List<Habilidades> verHabilidades(@PathVariable Long persona_id) {
+    public List<Habilidades> verHabilidades() {
         return habilServ.verHabilidades();
     }
 
-    @PostMapping("/{persona_id}/habilidad")
-    public Habilidades agregarHabilidad(@PathVariable Long persona_id,
+    @PostMapping("/habilidad")
+    public Habilidades agregarHabilidad(
             @RequestBody Habilidades habilidad) {
         habilServ.crearHabilidad(habilidad);
         return habilidad;
     }
 
-    @DeleteMapping("/{persona_id}/habilidad/{id}")
-    public void borrarHabilidad(@PathVariable Long persona_id,
+    @DeleteMapping("/habilidad/{id}")
+    public void borrarHabilidad(
             @PathVariable Long id) {
         habilServ.borrarHabilidad(id);
     }
 
-    @GetMapping("/{persona_id}/habilidad/{id}")
-    public void mostrarHabilidad(@PathVariable Long persona_id,
+    @GetMapping("/habilidad/{id}")
+    public void mostrarHabilidad(
             @PathVariable Long id) {
         habilServ.buscarHabilidad(id);
     }
 
-    @PutMapping("/{persona_id}/habilidad/{id}")
-    public Habilidades modificarHabilidad(@PathVariable Long persona_id,
+    @PutMapping("/habilidad/{id}")
+    public Habilidades modificarHabilidad(
             @PathVariable Long id,
             @RequestParam("nombre") String newNombre,
             @RequestParam("porcentaje") Long newPorcentaje
@@ -226,36 +225,33 @@ public class Controller {
     @Autowired
     private IProyectoService proyServ;
 
-    @GetMapping("/{persona_id}/proyectos")
+    @GetMapping("/proyectos")
     @ResponseBody
-    public List<Proyectos> verProyectos(@PathVariable Long persona_id) {
+    public List<Proyectos> verProyectos() {
         return proyServ.verProyectos();
     }
 
-    @PostMapping("/{persona_id}/proyecto")
-    public Proyectos agregarProyecto(@RequestBody Proyectos proyecto,
-            @PathVariable Long persona_id) {
+    @PostMapping("/proyecto")
+    public Proyectos agregarProyecto(@RequestBody Proyectos proyecto
+    ) {
         proyServ.crearProyecto(proyecto);
         return proyecto;
     }
 
-    @DeleteMapping("/{persona_id}/proyecto/{id}")
+    @DeleteMapping("/proyecto/{id}")
     public void borrarProyecto(
-            @PathVariable Long persona_id,
             @PathVariable Long id) {
         proyServ.borrarProyecto(id);
     }
 
-    @GetMapping("/{persona_id}/proyecto/{id}")
+    @GetMapping("/proyecto/{id}")
     public void mostrarProyecto(
-            @PathVariable Long persona_id,
             @PathVariable Long id) {
         proyServ.buscarProyecto(id);
     }
 
-    @PutMapping("/{persona_id}/proyecto/{id}")
+    @PutMapping("/proyecto/{id}")
     public Proyectos modificarProyecto(
-            @PathVariable Long persona_id,
             @PathVariable Long id,
             @RequestParam("nombre") String newNombre,
             @RequestParam("descripcion") String newDescripcion,
