@@ -49,9 +49,9 @@ public class Controller {
             @RequestParam("ciudad") String newCiudad,
             @RequestParam("provincia") String newProvincia,
             @RequestParam("pais") String newPais,
-            @RequestParam("img") String newImg,
-            @RequestParam("sobremi") String newSobremi
-    ) {
+            @RequestParam("img") String newImg
+            //     @RequestParam("sobremi") String newSobremi
+            ) {
         Persona persona = personaServ.buscarPersona(id);
         persona.setNombre(newNombre);
         persona.setTituloactual(newTituloactual);
@@ -62,8 +62,18 @@ public class Controller {
         persona.setProvincia(newProvincia);
         persona.setPais(newPais);
         persona.setImg(newImg);
-        persona.setSobremi(newSobremi);
+        //  persona.setSobremi(newSobremi);
 
+        personaServ.editarPersona(persona);
+        return persona;
+    }
+
+    @PutMapping("/{id}/sobremi")
+    public Persona modificarAbout(@PathVariable Long id,
+            @RequestParam("sobremi") String newSobremi
+    ) {
+        Persona persona = personaServ.buscarPersona(id);
+        persona.setSobremi(newSobremi);
         personaServ.editarPersona(persona);
         return persona;
     }
