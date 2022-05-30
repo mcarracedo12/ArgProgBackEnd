@@ -33,13 +33,13 @@ public class Controller {
     @Autowired
     private IPersonaService personaServ;
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     @ResponseBody
     public Persona mostrarPersona(@PathVariable Long id) {
         return personaServ.buscarPersona(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     public Persona modificarPersona(@PathVariable Long id,
             @RequestParam("nombre") String newNombre,
             @RequestParam("tituloactual") String newTituloactual,
@@ -68,7 +68,7 @@ public class Controller {
         return persona;
     }
 
-    @PutMapping("/{id}/sobremi")
+    @PutMapping("{id}/sobremi")
     public Persona modificarAbout(@PathVariable Long id,
             @RequestParam("sobremi") String newSobremi
     ) {
