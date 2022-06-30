@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,91 +41,76 @@ public class Controller {
 
     @PutMapping("{id}")
     public Persona modificarPersona(@PathVariable Long id,
-            @RequestParam("nombre") String newNombre,
-            @RequestParam("tituloactual") String newTituloactual,
-            @RequestParam("empresa") String newEmpresa,
-            @RequestParam("puesto") String newPuesto,
-            @RequestParam("contacto") String newContacto,
-            @RequestParam("ciudad") String newCiudad,
-            @RequestParam("provincia") String newProvincia,
-            @RequestParam("pais") String newPais,
-            @RequestParam("img") String newImg
-            //     @RequestParam("sobremi") String newSobremi
-            ) {
-        Persona persona = personaServ.buscarPersona(id);
-        persona.setNombre(newNombre);
-        persona.setTituloactual(newTituloactual);
-        persona.setEmpresa(newEmpresa);
-        persona.setPuesto(newPuesto);
-        persona.setContacto(newContacto);
-        persona.setCiudad(newCiudad);
-        persona.setProvincia(newProvincia);
-        persona.setPais(newPais);
-        persona.setImg(newImg);
-        //  persona.setSobremi(newSobremi);
-
-        personaServ.editarPersona(persona);
-        return persona;
-    }
-
-    @PutMapping("{id}/sobremi")
-    public Persona modificarAbout(@PathVariable Long id,
-            @RequestParam("sobremi") String newSobremi
+            @RequestBody Persona newPersona
     ) {
         Persona persona = personaServ.buscarPersona(id);
-        persona.setSobremi(newSobremi);
+        persona.setNombre(newPersona.getNombre());
+        persona.setTituloactual(newPersona.getTituloactual());
+        persona.setEmpresa(newPersona.getEmpresa());
+        persona.setPuesto(newPersona.getPuesto());
+        persona.setContacto(newPersona.getContacto());
+        persona.setCiudad(newPersona.getCiudad());
+        persona.setProvincia(newPersona.getProvincia());
+        persona.setPais(newPersona.getPais());
+        persona.setImg(newPersona.getImg());
+        persona.setSobremi(newPersona.getSobremi());
+
         personaServ.editarPersona(persona);
         return persona;
     }
 
+    // @PutMapping("{id}/sobremi")
+    //  public Persona modificarAbout(@PathVariable Long id,
+    //          @RequestParam("sobremi") String newSobremi
+    // ) {
+    //      Persona persona = personaServ.buscarPersona(id);
+    //      persona.setSobremi(newSobremi);
+    //     personaServ.editarPersona(persona);
+    //     return persona;
+    //  }
     /////FORMACION////
     List<Titulos> listaTitulos = new ArrayList();
 
     @Autowired
     private ITituloService tituloServ;
 
-    @GetMapping("formacion")
+    @GetMapping("titulos")
     @ResponseBody
     public List<Titulos> verTitulos() {
         return tituloServ.verFormacion();
     }
 
-    @PostMapping("titulo")
+    @PostMapping("titulos")
     public Titulos agregarTitulo(
             @RequestBody Titulos titulo) {
         tituloServ.crearTitulo(titulo);
         return titulo;
     }
 
-    @DeleteMapping("titulo/{id}")
+    @DeleteMapping("titulos/{id}")
     public void borrarTitulo(
             @PathVariable Long id) {
         tituloServ.borrarTitulo(id);
     }
 
-    @GetMapping("titulo/{id}")
+    @GetMapping("titulos/{id}")
     public void mostrarTitulo(
             @PathVariable Long id) {
         tituloServ.buscarTitulo(id);
     }
 
-    @PutMapping("titulo/{id}")
+    @PutMapping("titulos/{id}")
     public Titulos modificarTitulo(
             @PathVariable Long id,
-            @RequestParam("institucion") String newInstitucion,
-            @RequestParam("inicio") String newInicio,
-            @RequestParam("fin") String newFin,
-            @RequestParam("carrera") String newCarrera,
-            @RequestParam("link") String newLink,
-            @RequestParam("img") String newImg
+            @RequestBody Titulos newTitulo
     ) {
         Titulos titulo = tituloServ.buscarTitulo(id);
-        titulo.setInstitucion(newInstitucion);
-        titulo.setInicio(newInicio);
-        titulo.setFin(newFin);
-        titulo.setCarrera(newCarrera);
-        titulo.setLink(newLink);
-        titulo.setImg(newImg);
+        titulo.setInstitucion(newTitulo.getInstitucion());
+        titulo.setInicio(newTitulo.getInicio());
+        titulo.setFin(newTitulo.getFin());
+        titulo.setCarrera(newTitulo.getCarrera());
+        titulo.setLink(newTitulo.getLink());
+        titulo.setImg(newTitulo.getImg());
 
         tituloServ.editarTitulo(titulo);
         return titulo;
@@ -143,42 +128,37 @@ public class Controller {
         return expServ.verExperiencias();
     }
 
-    @PostMapping("experiencia")
+    @PostMapping("experiencias")
     public Experiencias agregarExperiencia(
             @RequestBody Experiencias experiencia) {
         expServ.crearExperiencia(experiencia);
         return experiencia;
     }
 
-    @DeleteMapping("experiencia/{id}")
+    @DeleteMapping("experiencias/{id}")
     public void borrarExperiencia(
             @PathVariable Long id) {
         expServ.borrarExperiencia(id);
     }
 
-    @GetMapping("experiencia/{id}")
+    @GetMapping("experiencias/{id}")
     public void mostrarExperiencia(
             @PathVariable Long id) {
         expServ.buscarExperiencia(id);
     }
 
-    @PutMapping("experiencia/{id}")
+    @PutMapping("experiencias/{id}")
     public Experiencias modificarExperiencia(
             @PathVariable Long id,
-            @RequestParam("empresa") String newEmpresa,
-            @RequestParam("inicio") String newInicio,
-            @RequestParam("fin") String newFin,
-            @RequestParam("puesto") String newPuesto,
-            @RequestParam("link") String newLink,
-            @RequestParam("img") String newImg
+            @RequestBody Experiencias newExperiencia
     ) {
         Experiencias experiencia = expServ.buscarExperiencia(id);
-        experiencia.setEmpresa(newEmpresa);
-        experiencia.setInicio(newInicio);
-        experiencia.setFin(newFin);
-        experiencia.setPuesto(newPuesto);
-        experiencia.setLink(newLink);
-        experiencia.setImg(newImg);
+        experiencia.setEmpresa(newExperiencia.getEmpresa());
+        experiencia.setInicio(newExperiencia.getInicio());
+        experiencia.setFin(newExperiencia.getFin());
+        experiencia.setPuesto(newExperiencia.getPuesto());
+        experiencia.setLink(newExperiencia.getLink());
+        experiencia.setImg(newExperiencia.getImg());
 
         expServ.editarExperiencia(experiencia);
         return experiencia;
@@ -196,34 +176,32 @@ public class Controller {
         return habilServ.verHabilidades();
     }
 
-    @PostMapping("habilidad")
+    @PostMapping("habilidades")
     public Habilidades agregarHabilidad(
             @RequestBody Habilidades habilidad) {
         habilServ.crearHabilidad(habilidad);
         return habilidad;
     }
 
-    @DeleteMapping("habilidad/{id}")
+    @DeleteMapping("habilidades/{id}")
     public void borrarHabilidad(
             @PathVariable Long id) {
         habilServ.borrarHabilidad(id);
     }
 
-    @GetMapping("habilidad/{id}")
+    @GetMapping("habilidades/{id}")
     public void mostrarHabilidad(
             @PathVariable Long id) {
         habilServ.buscarHabilidad(id);
     }
 
-    @PutMapping("habilidad/{id}")
+    @PutMapping("habilidades/{id}")
     public Habilidades modificarHabilidad(
             @PathVariable Long id,
-            @RequestParam("nombre") String newNombre,
-            @RequestParam("porcentaje") Long newPorcentaje
-    ) {
+            @RequestBody Habilidades newHabilidad) {
         Habilidades habilidad = habilServ.buscarHabilidad(id);
-        habilidad.setNombre(newNombre);
-        habilidad.setPorcentaje(newPorcentaje);
+        habilidad.setNombre(newHabilidad.getNombre());
+        habilidad.setPorcentaje(newHabilidad.getPorcentaje());
 
         habilServ.editarHabilidad(habilidad);
         return habilidad;
@@ -241,40 +219,36 @@ public class Controller {
         return proyServ.verProyectos();
     }
 
-    @PostMapping("proyecto")
+    @PostMapping("proyectos")
     public Proyectos agregarProyecto(@RequestBody Proyectos proyecto
     ) {
         proyServ.crearProyecto(proyecto);
         return proyecto;
     }
 
-    @DeleteMapping("proyecto/{id}")
+    @DeleteMapping("proyectos/{id}")
     public void borrarProyecto(
             @PathVariable Long id) {
         proyServ.borrarProyecto(id);
     }
 
-    @GetMapping("proyecto/{id}")
+    @GetMapping("proyectos/{id}")
     public void mostrarProyecto(
             @PathVariable Long id) {
         proyServ.buscarProyecto(id);
     }
 
-    @PutMapping("proyecto/{id}")
-    public Proyectos modificarProyecto(
-            @PathVariable Long id,
-            @RequestParam("nombre") String newNombre,
-            @RequestParam("descripcion") String newDescripcion,
-            @RequestParam("anio") String newAnio,
-            @RequestParam("link") String newLink
-    ) {
+    @PutMapping("proyectos/{id}")
+    public Proyectos modificarProyecto(@PathVariable Long id, @RequestBody Proyectos newProyecto) {
         Proyectos proyecto = proyServ.buscarProyecto(id);
-        proyecto.setNombre(newNombre);
-        proyecto.setDescripcion(newDescripcion);
-        proyecto.setAnio(newAnio);
-        proyecto.setLink(newLink);
+
+        proyecto.setNombre(newProyecto.getNombre());
+        proyecto.setDescripcion(newProyecto.getDescripcion());
+        proyecto.setAnio(newProyecto.getAnio());
+        proyecto.setLink(newProyecto.getLink());
 
         proyServ.editarProyecto(proyecto);
+
         return proyecto;
     }
 

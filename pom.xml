@@ -41,6 +41,7 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
+            <version>1.4.200</version>
         </dependency>
         
         <dependency>
@@ -63,8 +64,10 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
+            <version>8.0.26</version>
         </dependency>
+
+
 
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -96,7 +99,7 @@
             <plugin>
                 <groupId>com.heroku.sdk</groupId>
                 <artifactId>heroku-maven-plugin</artifactId>
-                 <version>3.0.3</version>
+                <version>3.0.3</version>
                 <configuration>
                     <processTypes>
                         <web>java $JAVA_OPTS -cp target/classes:target/dependency/* Main</web>
